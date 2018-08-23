@@ -45,8 +45,6 @@ namespace DistributionApp.ViewModels
             EditCustomer = new RelayCommand(EditCustomerCommand);
             objBL = new CustomerBL();
             CustomerList = new ObservableCollection<Customer>(objBL.GetCustomerList());
-
-
         }
 
         private void AddNewCustomerCommand(object commandParameter)
@@ -55,11 +53,21 @@ namespace DistributionApp.ViewModels
             {
                 DataContext = new AddCustomerViewModel()
             };
-            view.Show();
+            view.ShowDialog();
+            CustomerList = new ObservableCollection<Customer>(objBL.GetCustomerList());
         }
         private void EditCustomerCommand(object commandParameter)
         {
-
+            int customerId = int.Parse(commandParameter.ToString());
+            AddCustomerViewModel model = new AddCustomerViewModel();
+            model.LoadCustomer(customerId);
+            AddCustomerView view = new AddCustomerView()
+            {
+                DataContext = model,
+                Title = "Edit Customer"
+            };
+            view.ShowDialog();
+            CustomerList = new ObservableCollection<Customer>(objBL.GetCustomerList());
         }
 
 

@@ -11,7 +11,8 @@
         Title="Add New Customer"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        x:Name="CustomerSaveWindow">
     
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
@@ -176,7 +177,8 @@
             Content="Save"
             Width="50"
             HorizontalAlignment="Right"
-            Command="{Binding SaveCustomer}"/>
+            Command="{Binding SaveCustomer}"
+            CommandParameter="{Binding ElementName=CustomerSaveWindow}"/>
 
 
 

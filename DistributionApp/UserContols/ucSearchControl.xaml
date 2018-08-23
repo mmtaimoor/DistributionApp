@@ -98,7 +98,7 @@
             Content="Search"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Width="50"
+            Width="75"
             Height="20"
             Command="{Binding SearchCommand, ElementName=searchControl}"/>
 

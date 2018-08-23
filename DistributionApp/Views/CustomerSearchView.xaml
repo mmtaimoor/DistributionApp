@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:usercontrols="clr-namespace:DistributionApp.UserContols"
+
         mc:Ignorable="d"
         ShowInTaskbar="False"
         Title="Search Customer"
@@ -14,7 +16,7 @@
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
@@ -29,10 +31,12 @@
                 <TextBlock
                     Text="Search"
                     TextAlignment="Center"
+                    FontWeight="Bold"
+                    Background="LightYellow"
                     Width="{Binding ActualWidth, ElementName=SearchExpander}"/>
             </Expander.Header>
 
-            <Grid
+            <!--<Grid
                 FlowDirection="LeftToRight">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
@@ -142,22 +146,31 @@
                     
                 </Button>
 
-            </Grid>
-            
-            
+            </Grid>-->
+            <usercontrols:ucSearchControl 
+                Field1TextBlock="Name"
+                Field2TextBlock="Address1"
+                Field3TextBlock="Address2"
+                Field4TextBlock="City"
+                Field5TextBlock="Country"
+                FlowDirection="LeftToRight"
+                Height="70"/>
+
         </Expander>
 
         <Button 
             Margin="0,5,5,5"
             Grid.Row="1"
-            Content="Add New"
-            HorizontalAlignment="Left"
-            Command="{Binding AddNewCustomer}"/>
+            Command="{Binding AddNewCustomer}"
+            Style="{StaticResource ButtonAddNew}">
+
+        </Button>
 
         <CheckBox
             Grid.Row="1"
             HorizontalAlignment="Right"
-            Style="{StaticResource ToogleButtonCheckBox}"/>
+            Style="{StaticResource ToogleButtonCheckBox}"
+            Visibility="Hidden"/>
 
 
         <Border
@@ -172,11 +185,14 @@
                 AutoGenerateColumns="False">
 
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn  Width="50`">
+                    <DataGridTemplateColumn  Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Edit" Style="{StaticResource HyperlinkButton}" Command="{Binding EditCustomer}" 
-                                        CommandParameter="{Binding CustomerId}" HorizontalAlignment="Center"/> 
+                                <Button Content="Edit" Style="{StaticResource HyperlinkButton}" 
+                                        Command="{Binding Path=DataContext.EditCustomer, 
+                                                RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" 
+                                        CommandParameter="{Binding CustomerId}" HorizontalAlignment="Center"/>
+
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -186,6 +202,7 @@
                     <DataGridTextColumn Header="Address2" Binding="{Binding Address2}"/>
                     <DataGridTextColumn Header="City" Binding="{Binding City}"/>
                     <DataGridTextColumn Header="Country" Binding="{Binding Country}"/>
+                    <DataGridTextColumn Header="IsActive" Binding="{Binding IsActive, Converter={StaticResource boolToActiveConvertor}}" />
                 </DataGrid.Columns>
                 
             </DataGrid>

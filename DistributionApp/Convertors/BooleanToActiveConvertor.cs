@@ -12,7 +12,10 @@ namespace DistributionApp.Convertors
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (value != null)
+                return ((bool)value) ? "Active" : "Inactive";
+            else
+                return string.Empty;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

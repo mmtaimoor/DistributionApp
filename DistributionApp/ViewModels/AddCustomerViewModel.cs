@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using DistributionApp.BusinessLayer;
 using DistributionApp.DataLayer;
@@ -49,13 +50,16 @@ namespace DistributionApp.ViewModels
         {
             if (_customer != null)
             {
-                objBL.AddCustomer(Customer);
+                objBL.SaveCustomer(Customer);
+                var window = commandParameter as Window;
+                if (window != null)
+                    window.Close();
             }
         }
 
         public void LoadCustomer(int customerId)
         {
-
+            Customer = objBL.FindCustomerById(customerId);
         }
 
 

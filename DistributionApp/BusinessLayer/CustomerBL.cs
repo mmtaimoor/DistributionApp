@@ -21,12 +21,21 @@ namespace DistributionApp.BusinessLayer
             }
         }
 
-        public void AddCustomer(Customer _customer)
+        public void SaveCustomer(Customer _customer)
         {
             using (DistributionDbEntities context = new DistributionDbEntities())
             {
-                context.Customers.Add(_customer);
-                context.SaveChanges();
+                var cust = context.Customers.FirstOrDefault(x => x.CustomerId == _customer.CustomerId);
+                if (cust == null)
+                {
+                    context.Customers.Add(_customer);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    context.Entry(cust).CurrentValues.SetValues(_customer);
+                    context.SaveChanges();
+                }
             }
         }
 
