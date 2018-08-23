@@ -15,6 +15,10 @@
         <AssociationConnector Association="DistributionDbModel.FK_Inventory_Product" />
         <AssociationConnector Association="DistributionDbModel.FK_OrderDetails_Orders" />
         <AssociationConnector Association="DistributionDbModel.FK_OrderDetails_Product" />
+        <EntityTypeShape EntityType="DistributionDbModel.ReceiveGood" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DistributionDbModel.ReceiveGoodDetail" Width="1.5" PointX="9" PointY="5.75" />
+        <AssociationConnector Association="DistributionDbModel.FK_ReceiveGoodDetails_Product" />
+        <AssociationConnector Association="DistributionDbModel.FK_ReceiveGoodDetails_ReceiveGood" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

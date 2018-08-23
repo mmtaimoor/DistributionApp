@@ -31,5 +31,7 @@ namespace DistributionApp.DataLayer
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ReceiveGood> ReceiveGoods { get; set; }
+        public virtual DbSet<ReceiveGoodDetail> ReceiveGoodDetails { get; set; }
     }
 }

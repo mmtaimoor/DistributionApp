@@ -43,7 +43,7 @@ namespace DistributionApp.ViewModels
             SaveCustomer = new RelayCommand(SaveCustomerCommand);
             Customer = new Customer();
             objBL = new CustomerBL();
-        }
+        }        
 
         private void SaveCustomerCommand(object commandParameter)
         {
@@ -52,6 +52,12 @@ namespace DistributionApp.ViewModels
                 objBL.AddCustomer(Customer);
             }
         }
+
+        public void LoadCustomer(int customerId)
+        {
+
+        }
+
 
     }
 }

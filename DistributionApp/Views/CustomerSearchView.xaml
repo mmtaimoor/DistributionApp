@@ -154,6 +154,12 @@
             HorizontalAlignment="Left"
             Command="{Binding AddNewCustomer}"/>
 
+        <CheckBox
+            Grid.Row="1"
+            HorizontalAlignment="Right"
+            Style="{StaticResource ToogleButtonCheckBox}"/>
+
+
         <Border
             Grid.Row="2"
             BorderBrush="Black"
@@ -166,7 +172,7 @@
                 AutoGenerateColumns="False">
 
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn  Width="75">
+                    <DataGridTemplateColumn  Width="50`">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Edit" Style="{StaticResource HyperlinkButton}" Command="{Binding EditCustomer}" 

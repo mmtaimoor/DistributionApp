@@ -30,6 +30,13 @@ namespace DistributionApp.BusinessLayer
             }
         }
 
+        public Customer FindCustomerById(int customerId)
+        {
+            using (DistributionDbEntities context = new DistributionDbEntities())
+            {
+                return context.Customers.FirstOrDefault(x => x.CustomerId == customerId);
+            }
+        }
 
     }
 }

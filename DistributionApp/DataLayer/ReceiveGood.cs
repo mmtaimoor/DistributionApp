@@ -12,30 +12,22 @@ namespace DistributionApp.DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class ReceiveGood
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public ReceiveGood()
         {
-            this.Inventories = new HashSet<Inventory>();
-            this.OrderDetails = new HashSet<OrderDetail>();
             this.ReceiveGoodDetails = new HashSet<ReceiveGoodDetail>();
         }
     
-        public int ProductId { get; set; }
-        public string Name { get; set; }
-        public string Brand { get; set; }
-        public Nullable<decimal> PricePerUnit { get; set; }
-        public Nullable<bool> IsActive { get; set; }
+        public int ReceiveGoodId { get; set; }
+        public string TruckNumber { get; set; }
+        public Nullable<System.DateTime> ReceiveDate { get; set; }
+        public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
-        public string UpdatedBy { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inventory> Inventories { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReceiveGoodDetail> ReceiveGoodDetails { get; set; }
     }

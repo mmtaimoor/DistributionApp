@@ -8,7 +8,7 @@
         <TextBox
             MinWidth="100"
             TextAlignment="Right"
-            Text="ABC"
+            Text="1000"
             PreviewTextInput="TextBox_PreviewTextInput"
             Name="textbox"/>
 

@@ -99,6 +99,12 @@
     <Compile Include="DataLayer\Product.cs">
       <DependentUpon>DistributionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataLayer\ReceiveGood.cs">
+      <DependentUpon>DistributionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\ReceiveGoodDetail.cs">
+      <DependentUpon>DistributionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserContols\ucNumericTextBox.xaml.cs">
       <DependentUpon>ucNumericTextBox.xaml</DependentUpon>
     </Compile>

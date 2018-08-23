@@ -83,6 +83,29 @@
           <Property Name="UpdatedAt" Type="datetime" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ReceiveGood">
+          <Key>
+            <PropertyRef Name="ReceiveGoodId" />
+          </Key>
+          <Property Name="ReceiveGoodId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TruckNumber" Type="varchar" MaxLength="50" />
+          <Property Name="ReceiveDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ReceiveGoodDetails">
+          <Key>
+            <PropertyRef Name="ReceiveGoodDetailId" />
+          </Key>
+          <Property Name="ReceiveGoodDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceiveGoodId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="BatchNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="TotalValue" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
         <Association Name="FK_Inventory_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
@@ -131,6 +154,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ReceiveGoodDetails_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ReceiveGoodDetails" Type="Self.ReceiveGoodDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="ReceiveGoodDetails">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiveGoodDetails_ReceiveGood">
+          <End Role="ReceiveGood" Type="Self.ReceiveGood" Multiplicity="0..1" />
+          <End Role="ReceiveGoodDetails" Type="Self.ReceiveGoodDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReceiveGood">
+              <PropertyRef Name="ReceiveGoodId" />
+            </Principal>
+            <Dependent Role="ReceiveGoodDetails">
+              <PropertyRef Name="ReceiveGoodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DistributionDbModelStoreContainer">
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
@@ -138,6 +185,8 @@
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceiveGood" EntityType="Self.ReceiveGood" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceiveGoodDetails" EntityType="Self.ReceiveGoodDetails" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Inventory_Product" Association="Self.FK_Inventory_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="Inventory" EntitySet="Inventory" />
@@ -153,6 +202,14 @@
           <AssociationSet Name="FK_Orders_Customer" Association="Self.FK_Orders_Customer">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiveGoodDetails_Product" Association="Self.FK_ReceiveGoodDetails_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ReceiveGoodDetails" EntitySet="ReceiveGoodDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiveGoodDetails_ReceiveGood" Association="Self.FK_ReceiveGoodDetails_ReceiveGood">
+            <End Role="ReceiveGood" EntitySet="ReceiveGood" />
+            <End Role="ReceiveGoodDetails" EntitySet="ReceiveGoodDetails" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -202,6 +259,16 @@
           <AssociationSet Name="FK_OrderDetails_Product" Association="DistributionDbModel.FK_OrderDetails_Product">
             <End Role="Product" EntitySet="Products" />
             <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <EntitySet Name="ReceiveGoods" EntityType="DistributionDbModel.ReceiveGood" />
+          <EntitySet Name="ReceiveGoodDetails" EntityType="DistributionDbModel.ReceiveGoodDetail" />
+          <AssociationSet Name="FK_ReceiveGoodDetails_Product" Association="DistributionDbModel.FK_ReceiveGoodDetails_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ReceiveGoodDetail" EntitySet="ReceiveGoodDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiveGoodDetails_ReceiveGood" Association="DistributionDbModel.FK_ReceiveGoodDetails_ReceiveGood">
+            <End Role="ReceiveGood" EntitySet="ReceiveGoods" />
+            <End Role="ReceiveGoodDetail" EntitySet="ReceiveGoodDetails" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Employee">
@@ -268,6 +335,7 @@
           <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Inventories" Relationship="DistributionDbModel.FK_Inventory_Product" FromRole="Product" ToRole="Inventory" />
           <NavigationProperty Name="OrderDetails" Relationship="DistributionDbModel.FK_OrderDetails_Product" FromRole="Product" ToRole="OrderDetail" />
+          <NavigationProperty Name="ReceiveGoodDetails" Relationship="DistributionDbModel.FK_ReceiveGoodDetails_Product" FromRole="Product" ToRole="ReceiveGoodDetail" />
         </EntityType>
         <Association Name="FK_Orders_Customer">
           <End Type="DistributionDbModel.Customer" Role="Customer" Multiplicity="0..1" />
@@ -314,6 +382,56 @@
             </Principal>
             <Dependent Role="OrderDetail">
               <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ReceiveGood">
+          <Key>
+            <PropertyRef Name="ReceiveGoodId" />
+          </Key>
+          <Property Name="ReceiveGoodId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TruckNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReceiveDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ReceiveGoodDetails" Relationship="DistributionDbModel.FK_ReceiveGoodDetails_ReceiveGood" FromRole="ReceiveGood" ToRole="ReceiveGoodDetail" />
+        </EntityType>
+        <EntityType Name="ReceiveGoodDetail">
+          <Key>
+            <PropertyRef Name="ReceiveGoodDetailId" />
+          </Key>
+          <Property Name="ReceiveGoodDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceiveGoodId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="BatchNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="TotalValue" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Product" Relationship="DistributionDbModel.FK_ReceiveGoodDetails_Product" FromRole="ReceiveGoodDetail" ToRole="Product" />
+          <NavigationProperty Name="ReceiveGood" Relationship="DistributionDbModel.FK_ReceiveGoodDetails_ReceiveGood" FromRole="ReceiveGoodDetail" ToRole="ReceiveGood" />
+        </EntityType>
+        <Association Name="FK_ReceiveGoodDetails_Product">
+          <End Type="DistributionDbModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="DistributionDbModel.ReceiveGoodDetail" Role="ReceiveGoodDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="ReceiveGoodDetail">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiveGoodDetails_ReceiveGood">
+          <End Type="DistributionDbModel.ReceiveGood" Role="ReceiveGood" Multiplicity="0..1" />
+          <End Type="DistributionDbModel.ReceiveGoodDetail" Role="ReceiveGoodDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReceiveGood">
+              <PropertyRef Name="ReceiveGoodId" />
+            </Principal>
+            <Dependent Role="ReceiveGoodDetail">
+              <PropertyRef Name="ReceiveGoodId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -404,6 +522,31 @@
                 <ScalarProperty Name="Brand" ColumnName="Brand" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReceiveGoods">
+            <EntityTypeMapping TypeName="DistributionDbModel.ReceiveGood">
+              <MappingFragment StoreEntitySet="ReceiveGood">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="ReceiveDate" ColumnName="ReceiveDate" />
+                <ScalarProperty Name="TruckNumber" ColumnName="TruckNumber" />
+                <ScalarProperty Name="ReceiveGoodId" ColumnName="ReceiveGoodId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReceiveGoodDetails">
+            <EntityTypeMapping TypeName="DistributionDbModel.ReceiveGoodDetail">
+              <MappingFragment StoreEntitySet="ReceiveGoodDetails">
+                <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ReceiveGoodId" ColumnName="ReceiveGoodId" />
+                <ScalarProperty Name="ReceiveGoodDetailId" ColumnName="ReceiveGoodDetailId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
