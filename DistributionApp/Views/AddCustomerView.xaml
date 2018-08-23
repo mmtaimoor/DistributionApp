@@ -12,7 +12,8 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         SizeToContent="WidthAndHeight"
-        x:Name="CustomerSaveWindow">
+        x:Name="CustomerSaveWindow"
+        Icon="../Images/person.png">
     
     <Grid Margin="10">
         <Grid.ColumnDefinitions>

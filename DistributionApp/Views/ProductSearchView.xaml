@@ -1,0 +1,100 @@
+﻿<Window x:Class="DistributionApp.Views.ProductSearchView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:usercontrols="clr-namespace:DistributionApp.UserContols"
+        mc:Ignorable="d"
+        ShowInTaskbar="False"
+        Title="Search Product"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        Width="650"
+        Height="400"
+        Icon="../Images/product.png">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <Expander
+            x:Name="SearchExpander"
+            Grid.Row="0"
+            HorizontalAlignment="Stretch"
+            FlowDirection="RightToLeft"
+            ExpandDirection="Down">
+
+            <Expander.Header>
+                <TextBlock
+                    Text="Search"
+                    TextAlignment="Center"
+                    FontWeight="Bold"
+                    Background="LightYellow"
+                    Width="{Binding ActualWidth, ElementName=SearchExpander}"/>
+            </Expander.Header>
+
+            <usercontrols:ucSearchControl 
+                Field1TextBlock="Name"
+                Field2TextBlock="Address1"
+                Field3TextBlock="Address2"
+                Field4TextBlock="City"
+                Field5TextBlock="Country"
+                FlowDirection="LeftToRight"
+                Height="70"/>
+
+        </Expander>
+
+        <Button 
+            Margin="0,5,5,5"
+            Grid.Row="1"
+            Command="{Binding AddNewProduct}"
+            Style="{StaticResource ButtonAddNew}">
+
+        </Button>
+
+        <CheckBox
+            Grid.Row="1"
+            HorizontalAlignment="Right"
+            Style="{StaticResource ToogleButtonCheckBox}"
+            Visibility="Hidden"/>
+
+
+        <Border
+            Grid.Row="2"
+            BorderBrush="Black"
+            BorderThickness="1">
+
+            <DataGrid
+                IsReadOnly="True"
+                ItemsSource="{Binding ProductList}"
+                Style="{StaticResource DataGridStyle}"
+                AutoGenerateColumns="False">
+
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn  Width="50">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Edit" Style="{StaticResource HyperlinkButton}" 
+                                        Command="{Binding Path=DataContext.EditProduct, 
+                                                RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" 
+                                        CommandParameter="{Binding ProductId}" HorizontalAlignment="Center"/>
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Brand" Binding="{Binding Brand}"/>
+                    <DataGridTextColumn Header="Price Per Unit" Binding="{Binding PricePerUnit}"/>
+                    <DataGridTextColumn Header="IsActive" Binding="{Binding IsActive, Converter={StaticResource boolToActiveConvertor}}" />
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+
+        </Border>
+
+
+    </Grid>
+</Window>

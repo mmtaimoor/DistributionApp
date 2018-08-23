@@ -20,14 +20,14 @@ namespace DistributionApp.ViewModels
         #region [Commands]
 
         public ICommand OpenCustomerList { get; set; }
-
+        public ICommand OpenProductList { get; set; }
         #endregion
 
 
         public MainWindowViewModel()
         {
             OpenCustomerList = new RelayCommand(OpenCustomerListCommand);
-
+            OpenProductList = new RelayCommand(OpenProductListCommand);
         }
 
 
@@ -37,8 +37,15 @@ namespace DistributionApp.ViewModels
         {
             CustomerSearchView customerView = new CustomerSearchView();
             customerView.DataContext = new CustomerSearchViewModel();
-            //customerView.Owner = Utils.Instance.GetMainWindowView();
+            customerView.Owner = Utils.Instance.GetMainWindowView();
             customerView.Show();
+        }
+        private void OpenProductListCommand(object commandparameter)
+        {
+            ProductSearchView productView = new ProductSearchView();
+            productView.DataContext = new SearchProductViewModel();
+            productView.Owner = Utils.Instance.GetMainWindowView();
+            productView.Show();
         }
 
         #endregion

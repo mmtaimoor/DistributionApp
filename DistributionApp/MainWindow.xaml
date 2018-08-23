@@ -6,7 +6,8 @@
         mc:Ignorable="d"
         Title="Distribution Application" 
         WindowState="Maximized"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterOwner"
+        Icon="../Images/warehouse.png">
     <Grid>
         <Menu
             VerticalAlignment="Top"
@@ -15,6 +16,11 @@
                 <MenuItem Header="Customer" Command="{Binding OpenCustomerList}">
                     <MenuItem.Icon>
                         <Image Source="Images/person.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Product" Command="{Binding OpenProductList}">
+                    <MenuItem.Icon>
+                        <Image Source="Images/product.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>

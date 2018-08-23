@@ -4,14 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:usercontrols="clr-namespace:DistributionApp.UserContols"
-
         mc:Ignorable="d"
         ShowInTaskbar="False"
         Title="Search Customer"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         Width="800"
-        Height="600">
+        Height="600"
+        Icon="../Images/person.png">
     
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -197,7 +197,7 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Country" Binding="{Binding CreditLimit}"/>
+                    <DataGridTextColumn Header="CreditLimit" Binding="{Binding CreditLimit}"/>
                     <DataGridTextColumn Header="Address1" Binding="{Binding Address1}"/>
                     <DataGridTextColumn Header="Address2" Binding="{Binding Address2}"/>
                     <DataGridTextColumn Header="City" Binding="{Binding City}"/>
