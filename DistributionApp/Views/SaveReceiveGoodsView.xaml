@@ -83,16 +83,25 @@
                                               RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}"
                                               SelectedValuePath="ProductId"
                                               DisplayMemberPath="Name"
-                                              SelectedValue="{Binding Path=DataContext.ProductId, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}}"
+                                              
                                               SelectedItem="{Binding Path=DataContext.Product, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}}">
                                     </ComboBox>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTextColumn 
-                            Header="Price Per Unit" 
+                            Header="Price Per Unit"
                             Binding="{Binding Path=DataContext.Product.PricePerUnit, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}}"
                             TextBlock.TextAlignment="Right"/>
+                        <DataGridTemplateColumn Header="Batch Number">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox
+                                        Width="100"
+                                        Text="{Binding Path=DataContext.BatchNumber, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTemplateColumn Header="Quantity">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -110,8 +119,6 @@
                                     <Binding Path="DataContext.Product.PricePerUnit" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}"
                                              Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
                                     <Binding Path="DataContext.Quantity" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}"
-                                             Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                    <Binding Path="DataContext.TotalValue" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}"
                                              Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
                                 </MultiBinding>
                             </DataGridTextColumn.Binding>

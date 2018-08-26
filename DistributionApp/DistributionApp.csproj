@@ -120,6 +120,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CustomerSearchViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\ReceiveGoodsSearchViewModel.cs" />
     <Compile Include="ViewModels\SaveProductViewModel.cs" />
     <Compile Include="ViewModels\SaveReceiveGoodsViewModel.cs" />
     <Compile Include="ViewModels\SearchProductViewModel.cs" />
@@ -131,6 +132,9 @@
     </Compile>
     <Compile Include="Views\ProductSearchView.xaml.cs">
       <DependentUpon>ProductSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReceiveGoodsSearchView.xaml.cs">
+      <DependentUpon>ReceiveGoodsSearchView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SaveProductView.xaml.cs">
       <DependentUpon>SaveProductView.xaml</DependentUpon>
@@ -171,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProductSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReceiveGoodsSearchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

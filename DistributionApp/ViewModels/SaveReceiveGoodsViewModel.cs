@@ -73,7 +73,7 @@ namespace DistributionApp.ViewModels
             AddNewInvoiceDetail = new RelayCommand(AddNewInvoiceDetailCommand);
             DeleteInvoiceDetail = new RelayCommand(DeleteInvoiceDetailCommand);
             SaveReceiveGoods = new RelayCommand(SaveReceiveGoodsCommand);
-            ProductList = new ObservableCollection<Product>(objProductBL.GetProductList());
+            ProductList = new ObservableCollection<Product>(objProductBL.GetActiveProducts());
             ReceiveGoodDetail = new ObservableCollection<ReceiveGoodDetail>();
         }
 
@@ -94,8 +94,8 @@ namespace DistributionApp.ViewModels
 
         private void SaveReceiveGoodsCommand(object commandparameter)
         {
+            ReceiveGoodDetail.ToList().ForEach(x => x.TotalValue = x.Quantity * x.Product.PricePerUnit);
             ReceiveGood.ReceiveGoodDetails = ReceiveGoodDetail;
-
             objReceiveGoodsBL.SaveReceiveGoods(ReceiveGood);
         }
 

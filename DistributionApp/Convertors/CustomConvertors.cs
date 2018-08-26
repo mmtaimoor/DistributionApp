@@ -17,7 +17,6 @@ namespace DistributionApp.Convertors
             
             if (price != null && qty != null)
             {
-                values[2] = (price.GetValueOrDefault() * qty.GetValueOrDefault());
                 return (price.GetValueOrDefault() * qty.GetValueOrDefault()).ToString();
             }
                 

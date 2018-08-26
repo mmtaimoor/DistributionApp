@@ -24,7 +24,10 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Receive Goods" Command="{Binding OpenReceiveGoods}" />
+            <MenuItem Header="Receive Goods" >
+                <MenuItem Header="Add New" Command="{Binding OpenReceiveGoods}"/>
+                <MenuItem Header="Search" Command="{Binding SearchReceiveGoods}"/>
+            </MenuItem>
         </Menu>
     </Grid>
 </Window>

@@ -22,6 +22,14 @@ namespace DistributionApp.BusinessLayer
             }
         }
 
+        public List<Product> GetActiveProducts()
+        {
+            using (DistributionDbEntities context = new DistributionDbEntities())
+            {
+                return context.Products.Where(x=> x.IsActive==true).ToList();
+            }
+        }
+
         public void SaveProduct(Product _product)
         {
             using (DistributionDbEntities context = new DistributionDbEntities())
@@ -40,7 +48,7 @@ namespace DistributionApp.BusinessLayer
             }
         }
 
-        public Product FindProductById(int productId)
+        public Product FindProductById(int? productId)
         {
             using (DistributionDbEntities context = new DistributionDbEntities())
             {
