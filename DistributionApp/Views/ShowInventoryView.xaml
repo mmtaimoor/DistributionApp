@@ -1,0 +1,42 @@
+﻿<Window x:Class="DistributionApp.Views.ShowInventoryView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        ShowInTaskbar="False"
+        Title="Current Inventory"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        Icon="../Images/receivegoods.png"
+        Width="600"
+        Height="400"
+        xmlns:usercontrols="clr-namespace:DistributionApp.UserContols">
+    <Grid Margin="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Current Inventory Position" VerticalAlignment="Center" FontSize="14" FontWeight="Bold"/>
+
+        <DataGrid
+            Style="{StaticResource DataGridStyle}"
+            Grid.Row="1"
+            CanUserAddRows="False"
+            IsReadOnly="True"
+            ItemsSource="{Binding InventoryList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            VerticalAlignment="Stretch"
+            AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Product" Binding="{Binding ProductReport.Name}" />
+                <DataGridTextColumn Header="Batch Number" Binding="{Binding BatchNumber}"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Qty}"/>
+                <DataGridTextColumn Header="Expiry Date" Binding="{Binding ExpiryDate}"/>
+            </DataGrid.Columns>
+            
+        </DataGrid>
+
+
+    </Grid>
+</Window>

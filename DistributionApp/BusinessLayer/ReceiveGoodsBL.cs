@@ -10,9 +10,11 @@ namespace DistributionApp.BusinessLayer
 {
     public class ReceiveGoodsBL
     {
+        private InventoryBL objInventoryBL;
+
         public ReceiveGoodsBL()
         {
-
+            objInventoryBL = new InventoryBL();
         }
 
         public void SaveReceiveGoods(ReceiveGood _receiveGood)
@@ -24,6 +26,7 @@ namespace DistributionApp.BusinessLayer
                 {
                     context.ReceiveGoods.Add(_receiveGood);
                     context.SaveChanges();
+                    objInventoryBL.SaveInventoryFromReceiveGoods(_receiveGood);
                 }
                 else
                 {

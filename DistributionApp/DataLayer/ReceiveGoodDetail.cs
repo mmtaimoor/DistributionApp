@@ -20,6 +20,7 @@ namespace DistributionApp.DataLayer
         public string BatchNumber { get; set; }
         public Nullable<int> Quantity { get; set; }
         public Nullable<decimal> TotalValue { get; set; }
+        public Nullable<System.DateTime> ExpiryDate { get; set; }
     
         public virtual Product Product { get; set; }
         public virtual ReceiveGood ReceiveGood { get; set; }

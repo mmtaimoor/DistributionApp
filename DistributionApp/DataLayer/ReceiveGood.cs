@@ -11,8 +11,7 @@ namespace DistributionApp.DataLayer
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-
+    
     public partial class ReceiveGood
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -32,8 +31,5 @@ namespace DistributionApp.DataLayer
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReceiveGoodDetail> ReceiveGoodDetails { get; set; }
-
-        // The following property is used for showing parent and child relationship
-        public ObservableCollection <ReceiveGoodDetail> ShowReceiveGoodDetails { get; set; }
     }
 }

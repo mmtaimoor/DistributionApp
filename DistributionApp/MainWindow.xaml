@@ -28,6 +28,8 @@
                 <MenuItem Header="Add New" Command="{Binding OpenReceiveGoods}"/>
                 <MenuItem Header="Search" Command="{Binding SearchReceiveGoods}"/>
             </MenuItem>
+            <MenuItem Header="Inventory" Command="{Binding OpenInventory}"/>
+
         </Menu>
     </Grid>
 </Window>

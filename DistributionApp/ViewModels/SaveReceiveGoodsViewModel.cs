@@ -94,7 +94,7 @@ namespace DistributionApp.ViewModels
 
         private void SaveReceiveGoodsCommand(object commandparameter)
         {
-            ReceiveGoodDetail.ToList().ForEach(x => x.TotalValue = x.Quantity * x.Product.PricePerUnit);
+            ReceiveGoodDetail.ToList().ForEach(x => x.TotalValue = x.Quantity * x.ProductReport.PricePerUnit);
             ReceiveGood.ReceiveGoodDetails = ReceiveGoodDetail;
             objReceiveGoodsBL.SaveReceiveGoods(ReceiveGood);
         }

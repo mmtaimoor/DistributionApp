@@ -65,6 +65,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BusinessLayer\CustomerBL.cs" />
+    <Compile Include="BusinessLayer\InventoryBL.cs" />
     <Compile Include="BusinessLayer\ProductBL.cs" />
     <Compile Include="BusinessLayer\ReceiveGoodsBL.cs" />
     <Compile Include="Convertors\BooleanToActiveConvertor.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="DataLayer\ReceiveGoodDetail.cs">
       <DependentUpon>DistributionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataLayer\ReceiveGoodDetailReport.cs" />
     <Compile Include="UserContols\ucNumericTextBox.xaml.cs">
       <DependentUpon>ucNumericTextBox.xaml</DependentUpon>
     </Compile>
@@ -124,6 +126,7 @@
     <Compile Include="ViewModels\SaveProductViewModel.cs" />
     <Compile Include="ViewModels\SaveReceiveGoodsViewModel.cs" />
     <Compile Include="ViewModels\SearchProductViewModel.cs" />
+    <Compile Include="ViewModels\ShowInventoryViewModel.cs" />
     <Compile Include="Views\AddCustomerView.xaml.cs">
       <DependentUpon>AddCustomerView.xaml</DependentUpon>
     </Compile>
@@ -141,6 +144,9 @@
     </Compile>
     <Compile Include="Views\SaveReceiveGoodsView.xaml.cs">
       <DependentUpon>SaveReceiveGoodsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShowInventoryView.xaml.cs">
+      <DependentUpon>ShowInventoryView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -187,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SaveReceiveGoodsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShowInventoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

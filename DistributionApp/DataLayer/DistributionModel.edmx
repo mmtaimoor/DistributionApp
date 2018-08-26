@@ -41,6 +41,7 @@
           <Property Name="ProductId" Type="int" />
           <Property Name="Qty" Type="int" />
           <Property Name="BatchNumber" Type="varchar" MaxLength="50" />
+          <Property Name="ExpiryDate" Type="date" />
           <Property Name="CreatedAt" Type="datetime" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
           <Property Name="UpdatedAt" Type="datetime" />
@@ -104,6 +105,7 @@
           <Property Name="ReceiveGoodId" Type="int" />
           <Property Name="ProductId" Type="int" />
           <Property Name="BatchNumber" Type="varchar" MaxLength="50" />
+          <Property Name="ExpiryDate" Type="date" />
           <Property Name="Quantity" Type="int" />
           <Property Name="TotalValue" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
@@ -293,6 +295,7 @@
           <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Product" Relationship="DistributionDbModel.FK_Inventory_Product" FromRole="Inventory" ToRole="Product" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -412,6 +415,7 @@
           <Property Name="TotalValue" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="Product" Relationship="DistributionDbModel.FK_ReceiveGoodDetails_Product" FromRole="ReceiveGoodDetail" ToRole="Product" />
           <NavigationProperty Name="ReceiveGood" Relationship="DistributionDbModel.FK_ReceiveGoodDetails_ReceiveGood" FromRole="ReceiveGoodDetail" ToRole="ReceiveGood" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="0" />
         </EntityType>
         <Association Name="FK_ReceiveGoodDetails_Product">
           <End Type="DistributionDbModel.Product" Role="Product" Multiplicity="0..1" />
@@ -476,6 +480,7 @@
           <EntitySetMapping Name="Inventories">
             <EntityTypeMapping TypeName="DistributionDbModel.Inventory">
               <MappingFragment StoreEntitySet="Inventory">
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -544,6 +549,7 @@
           <EntitySetMapping Name="ReceiveGoodDetails">
             <EntityTypeMapping TypeName="DistributionDbModel.ReceiveGoodDetail">
               <MappingFragment StoreEntitySet="ReceiveGoodDetails">
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
                 <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
