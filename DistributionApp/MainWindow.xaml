@@ -24,6 +24,7 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+            <MenuItem Header="Receive Goods" Command="{Binding OpenReceiveGoods}" />
         </Menu>
     </Grid>
 </Window>

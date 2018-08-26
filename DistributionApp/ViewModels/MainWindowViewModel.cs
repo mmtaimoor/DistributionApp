@@ -21,6 +21,8 @@ namespace DistributionApp.ViewModels
 
         public ICommand OpenCustomerList { get; set; }
         public ICommand OpenProductList { get; set; }
+        public ICommand OpenReceiveGoods { get; set; }
+
         #endregion
 
 
@@ -28,6 +30,7 @@ namespace DistributionApp.ViewModels
         {
             OpenCustomerList = new RelayCommand(OpenCustomerListCommand);
             OpenProductList = new RelayCommand(OpenProductListCommand);
+            OpenReceiveGoods = new RelayCommand(OpenReceiveGoodsCommand);
         }
 
 
@@ -40,14 +43,20 @@ namespace DistributionApp.ViewModels
             customerView.Owner = Utils.Instance.GetMainWindowView();
             customerView.Show();
         }
-        private void OpenProductListCommand(object commandparameter)
+        private void OpenProductListCommand(object commandParameter)
         {
             ProductSearchView productView = new ProductSearchView();
             productView.DataContext = new SearchProductViewModel();
             productView.Owner = Utils.Instance.GetMainWindowView();
             productView.Show();
         }
-
+        private void OpenReceiveGoodsCommand(object commandParameter)
+        {
+            SaveReceiveGoods receiveGoodsView = new SaveReceiveGoods();
+            receiveGoodsView.DataContext = new SaveReceiveGoodsViewModel();
+            receiveGoodsView.Owner = Utils.Instance.GetMainWindowView();
+            receiveGoodsView.Show();
+        }
         #endregion
 
     }

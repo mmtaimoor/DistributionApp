@@ -1,0 +1,147 @@
+﻿<Window x:Class="DistributionApp.Views.SaveReceiveGoods"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        ShowInTaskbar="False"
+        Title="Add Receive Goods"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        Icon="../Images/receivegoods.png"
+        SizeToContent="WidthAndHeight"
+        xmlns:usercontrols="clr-namespace:DistributionApp.UserContols">
+    
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Receive Good Invoice" Grid.Row="0">
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Document Number: "  Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding ReceiveGood.DocumentNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" Width="125" VerticalContentAlignment="Center" />
+                <TextBlock Text="Truck Number: "  Grid.Column="3" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding ReceiveGood.TruckNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="4" Width="125" VerticalContentAlignment="Center" />
+                <TextBlock Text="Document Number: "  Grid.Column="6" VerticalAlignment="Center"/>
+                <DatePicker Grid.Column="7" Width="125" 
+                            SelectedDate="{Binding ReceiveGood.ReceiveDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                            VerticalContentAlignment="Center" />
+            </Grid>
+        </GroupBox>
+        
+        <GroupBox Header="Invoice Details" Grid.Row="2">
+            <Grid Margin="0,10,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Button Style="{StaticResource ButtonAddNew}" Command="{Binding AddNewInvoiceDetail}" Grid.Row="0"/>
+                
+                <DataGrid
+                    Style="{StaticResource DataGridStyle}"
+                    ColumnHeaderStyle="{StaticResource DataGridColumnStyle}"
+                    AutoGenerateColumns="False"
+                    Grid.Row="2"
+                    Height="200"
+                    ItemsSource="{Binding ReceiveGoodDetail, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    CanUserAddRows="False"
+                    x:Name="InvoiceDetail">
+
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn  Width="50">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Delete" Style="{StaticResource HyperlinkButton}" 
+                                        Command="{Binding Path=DataContext.DeleteInvoiceDetail, 
+                                          RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" 
+                                         CommandParameter="{Binding ElementName=InvoiceDetail, Path=SelectedItem}"   
+                                         HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Product" Width="150" HeaderStyle="{StaticResource DataGridColumnStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding Path=DataContext.ProductList,
+                                              RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}"
+                                              SelectedValuePath="ProductId"
+                                              DisplayMemberPath="Name"
+                                              SelectedValue="{Binding Path=DataContext.ProductId, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}}"
+                                              SelectedItem="{Binding Path=DataContext.Product, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}}">
+                                    </ComboBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn 
+                            Header="Price Per Unit" 
+                            Binding="{Binding Path=DataContext.Product.PricePerUnit, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}}"
+                            TextBlock.TextAlignment="Right"/>
+                        <DataGridTemplateColumn Header="Quantity">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <usercontrols:ucNumericTextBox
+                                        HasDecimal="False"
+                                        TxtBoxValue="{Binding Path=DataContext.Quantity, 
+                                        RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}, 
+                                        UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Total Value" >
+                            <DataGridTextColumn.Binding>
+                                <MultiBinding Converter="{StaticResource CalculateTotalPrice}">
+                                    <Binding Path="DataContext.Product.PricePerUnit" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}"
+                                             Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                                    <Binding Path="DataContext.Quantity" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}"
+                                             Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                                    <Binding Path="DataContext.TotalValue" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}"
+                                             Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                                </MultiBinding>
+                            </DataGridTextColumn.Binding>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Invoice Summary" Grid.Row="4">
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Total Invoice Price" Grid.Column="0"/>
+                <usercontrols:ucNumericTextBox
+                    IsEnabled="False"
+                    Grid.Column="2"
+                    Width="100"
+                    HasDecimal="True"
+                    />
+            </Grid>
+        </GroupBox>
+
+        <Button
+            Grid.Row="6"
+            Style="{StaticResource ButtonSave}"
+            Command="{Binding SaveReceiveGoods}"/>
+
+    </Grid>
+</Window>

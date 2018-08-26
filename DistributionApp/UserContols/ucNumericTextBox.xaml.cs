@@ -34,10 +34,19 @@ namespace DistributionApp.UserContols
             base.OnPropertyChanged(e);
             if (e.Property == TxtBoxValueProperty)
             {
-                // Do whatever you want with it
                 textbox.Text = TxtBoxValue;
             }
         }
+
+        public static DependencyProperty HasDecimalProperty = DependencyProperty.Register("HasDecmial", typeof(bool), 
+            typeof(ucNumericTextBox), new UIPropertyMetadata(false));
+
+        public bool HasDecimal
+        {
+            get { return (bool)GetValue(HasDecimalProperty); }
+            set { SetValue(HasDecimalProperty, value); }
+        }
+
 
         public ucNumericTextBox()
         {
@@ -46,12 +55,20 @@ namespace DistributionApp.UserContols
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("^[.][0-9]+$|^[0-9]*[.]{0,1}[0-9]*$");
+            Regex regex;
+
+            if (HasDecimal)
+            {
+                regex = new Regex("^[.][0-9]+$|^[0-9]*[.]{0,1}[0-9]*$");
+            }
+            else
+            {
+                 regex = new Regex("^[0-9]+$");
+            }
             e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
-        
             //if (!char.IsDigit(e.Text, e.Text.Length - 1))
             //    e.Handled = true;
-            
+
         }
 
     }

@@ -76,6 +76,7 @@
             VerticalAlignment="Stretch"
             Width="200"
             Margin="10,0,0,0"
+            HasDecimal="True"
             TxtBoxValue="{Binding Product.PricePerUnit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
         <TextBlock 

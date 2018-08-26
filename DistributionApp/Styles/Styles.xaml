@@ -124,7 +124,28 @@
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
-    <convertors:BooleanToActiveConvertor x:Key="boolToActiveConvertor"/>
+    <Style x:Key="ButtonSave" TargetType="{x:Type Button}">
+        <Setter Property="Content" >
+            <Setter.Value>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Images/save.png" VerticalAlignment="Center"/>
+                    <TextBlock Text="Save" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Background" Value="Azure"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
 
+    <Style x:Key="DataGridColumnStyle" TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    </Style> 
+
+    <convertors:BooleanToActiveConvertor x:Key="boolToActiveConvertor"/>
+    <convertors:CalculateTotalPrice x:Key="CalculateTotalPrice"/>
 
 </ResourceDictionary>

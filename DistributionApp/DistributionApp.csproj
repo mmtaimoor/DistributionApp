@@ -66,7 +66,9 @@
     </ApplicationDefinition>
     <Compile Include="BusinessLayer\CustomerBL.cs" />
     <Compile Include="BusinessLayer\ProductBL.cs" />
+    <Compile Include="BusinessLayer\ReceiveGoodsBL.cs" />
     <Compile Include="Convertors\BooleanToActiveConvertor.cs" />
+    <Compile Include="Convertors\CustomConvertors.cs" />
     <Compile Include="DataLayer\Customer.cs">
       <DependentUpon>DistributionModel.tt</DependentUpon>
     </Compile>
@@ -119,6 +121,7 @@
     <Compile Include="ViewModels\CustomerSearchViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\SaveProductViewModel.cs" />
+    <Compile Include="ViewModels\SaveReceiveGoodsViewModel.cs" />
     <Compile Include="ViewModels\SearchProductViewModel.cs" />
     <Compile Include="Views\AddCustomerView.xaml.cs">
       <DependentUpon>AddCustomerView.xaml</DependentUpon>
@@ -131,6 +134,9 @@
     </Compile>
     <Compile Include="Views\SaveProductView.xaml.cs">
       <DependentUpon>SaveProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaveReceiveGoodsView.xaml.cs">
+      <DependentUpon>SaveReceiveGoodsView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -169,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SaveProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaveReceiveGoodsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -225,6 +235,9 @@
       <DependentUpon>DistributionModel.edmx</DependentUpon>
       <LastGenOutput>DistributionModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Images\save.png" />
+    <Resource Include="Images\receivegoods.png" />
+    <Resource Include="Images\truck.png" />
     <Resource Include="Images\warehouse.png" />
     <Resource Include="Images\product.png" />
     <Resource Include="Images\add_new.png" />
