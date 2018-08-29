@@ -22,4 +22,11 @@ namespace DistributionApp.DataLayer
         public Product ProductReport { get; set; }
     }
 
+    public partial class OrderDetail
+    {
+        public Product ProductReport { get; set; }
+    }
+
+
+
 }

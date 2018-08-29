@@ -66,6 +66,7 @@
     </ApplicationDefinition>
     <Compile Include="BusinessLayer\CustomerBL.cs" />
     <Compile Include="BusinessLayer\InventoryBL.cs" />
+    <Compile Include="BusinessLayer\OrderBL.cs" />
     <Compile Include="BusinessLayer\ProductBL.cs" />
     <Compile Include="BusinessLayer\ReceiveGoodsBL.cs" />
     <Compile Include="Convertors\BooleanToActiveConvertor.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="ViewModels\CustomerSearchViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ReceiveGoodsSearchViewModel.cs" />
+    <Compile Include="ViewModels\SaveOrderViewModel.cs" />
     <Compile Include="ViewModels\SaveProductViewModel.cs" />
     <Compile Include="ViewModels\SaveReceiveGoodsViewModel.cs" />
     <Compile Include="ViewModels\SearchProductViewModel.cs" />
@@ -138,6 +140,9 @@
     </Compile>
     <Compile Include="Views\ReceiveGoodsSearchView.xaml.cs">
       <DependentUpon>ReceiveGoodsSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaveOrderView.xaml.cs">
+      <DependentUpon>SaveOrderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SaveProductView.xaml.cs">
       <DependentUpon>SaveProductView.xaml</DependentUpon>
@@ -185,6 +190,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ReceiveGoodsSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaveOrderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -32,8 +32,7 @@ namespace DistributionApp.BusinessLayer
                 {
                     context.Entry(receiveGoods).CurrentValues.SetValues(_receiveGood);
                     context.SaveChanges();
-                }
-                
+                }   
             }
         }
 

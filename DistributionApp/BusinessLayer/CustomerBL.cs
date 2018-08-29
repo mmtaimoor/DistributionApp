@@ -21,6 +21,14 @@ namespace DistributionApp.BusinessLayer
             }
         }
 
+        public List<Customer> GetActiveCustomers()
+        {
+            using (DistributionDbEntities context = new DistributionDbEntities())
+            {
+                return context.Customers.Where(x=> x.IsActive == true).ToList();
+            }
+        }
+
         public void SaveCustomer(Customer _customer)
         {
             using (DistributionDbEntities context = new DistributionDbEntities())

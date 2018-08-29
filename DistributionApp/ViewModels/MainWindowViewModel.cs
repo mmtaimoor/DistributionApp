@@ -24,6 +24,7 @@ namespace DistributionApp.ViewModels
         public ICommand OpenReceiveGoods { get; set; }
         public ICommand SearchReceiveGoods { get; set; }
         public ICommand OpenInventory { get; set; }
+        public ICommand SaveOrders { get; set; }
 
         #endregion
 
@@ -35,6 +36,7 @@ namespace DistributionApp.ViewModels
             OpenReceiveGoods = new RelayCommand(OpenReceiveGoodsCommand);
             SearchReceiveGoods = new RelayCommand(SearchReceiveGoodsCommand);
             OpenInventory = new RelayCommand(OpenInventoryCommand);
+            SaveOrders = new RelayCommand(SaveOrdersCommand);
         }
 
 
@@ -74,6 +76,14 @@ namespace DistributionApp.ViewModels
             inventoryView.DataContext = new ShowInventoryViewModel();
             inventoryView.Owner = Utils.Instance.GetMainWindowView();
             inventoryView.Show();
+        }
+
+        private void SaveOrdersCommand(object commandparameter)
+        {
+            SaveOrderView orderView = new SaveOrderView();
+            orderView.DataContext = new SaveOrderViewModel();
+            orderView.Owner = Utils.Instance.GetMainWindowView();
+            orderView.Show();
         }
 
         #endregion

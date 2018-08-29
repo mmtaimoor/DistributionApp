@@ -30,6 +30,12 @@
             </MenuItem>
             <MenuItem Header="Inventory" Command="{Binding OpenInventory}"/>
 
+            <MenuItem Header="Orders" >
+                <MenuItem Header="Add New" Command="{Binding SaveOrders}"/>
+                <MenuItem Header="Search" Command="{Binding SearchOrders}"/>
+            </MenuItem>
+
+
         </Menu>
     </Grid>
 </Window>
