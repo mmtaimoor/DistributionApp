@@ -240,6 +240,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DistributionModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Database files\File" />
     <None Include="DataLayer\DistributionModel.edmx.diagram">
       <DependentUpon>DistributionModel.edmx</DependentUpon>
     </None>
@@ -260,6 +261,7 @@
     <Resource Include="Images\search.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Database files\script.sql" />
     <Content Include="DataLayer\DistributionModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DistributionModel.Context.cs</LastGenOutput>
