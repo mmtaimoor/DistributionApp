@@ -27,6 +27,11 @@ namespace DistributionApp.DataLayer
         public Product ProductReport { get; set; }
     }
 
+    public partial class Order
+    {
+        public ObservableCollection<OrderDetail> ShowOrderDetails { get; set; }
+    }
+
 
 
 }

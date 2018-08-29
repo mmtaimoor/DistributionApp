@@ -90,6 +90,8 @@ namespace DistributionApp.ViewModels
             SaveOrder = new RelayCommand(SaveOrderCommand);
             CustomerList = new ObservableCollection<Customer>(objCustomerBL.GetActiveCustomers());
             ProductList = new ObservableCollection<Product>(objProductBL.GetActiveProducts());
+            Order.IsActive = true;
+            Order.InvoiceCreated = false;
         }
 
         private void AddNewOrderDetailCommand(object commandparameter)

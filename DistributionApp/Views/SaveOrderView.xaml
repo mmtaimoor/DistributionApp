@@ -31,6 +31,9 @@
                     <ColumnDefinition Width="10"/>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
 
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Customer: "  Grid.Column="0" VerticalAlignment="Center"/>
@@ -41,6 +44,12 @@
                           SelectedValue="{Binding Order.CustomerId, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                 <TextBlock Text="Order Date: "  Grid.Column="3" VerticalAlignment="Center"/>
                 <DatePicker SelectedDate="{Binding Order.OrderDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="4" Width="125" VerticalContentAlignment="Center" />
+                <TextBlock Text="IsActive: " Grid.Column="6" VerticalAlignment="Center"/>
+                <ComboBox Grid.Column="7" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="100"
+                SelectedIndex="{Binding Order.IsActive, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                    <ComboBoxItem Content="No" />
+                    <ComboBoxItem Content="Yes"/>
+                </ComboBox>
 
             </Grid>
         </GroupBox>

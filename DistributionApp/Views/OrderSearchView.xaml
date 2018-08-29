@@ -1,18 +1,19 @@
-﻿<Window x:Class="DistributionApp.Views.ReceiveGoodsSearchView"
+﻿<Window x:Class="DistributionApp.Views.OrderSearchView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         ShowInTaskbar="False"
-        Title="Add Receive Goods"
+        Title="Search Order"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
+        Width="800"
+        Height="600"
         Icon="../Images/receivegoods.png"
-        
-        xmlns:usercontrols="clr-namespace:DistributionApp.UserContols"
-        Height="500" Width="800">
-
+        xmlns:usercontrols="clr-namespace:DistributionApp.UserContols">
+    
     <Grid Margin="10">
+
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="10"/>
@@ -64,7 +65,7 @@
                     Grid.RowSpan="3"
                     VerticalAlignment="Center"
                     Style="{StaticResource ButtonSearch}"
-                    Command="{Binding SearchReceiveGoods}" Grid.ColumnSpan="2" Height="26" Margin="0,16,1,16"/>
+                    Command="{Binding SearchOrders}" Grid.ColumnSpan="2" Height="26" Margin="0,16,1,16"/>
             </Grid>
 
 
@@ -75,7 +76,7 @@
             Grid.Row="2"
             Style="{StaticResource DataGridStyle}"
             AutoGenerateColumns="False"
-            ItemsSource="{Binding ReceiveGoods, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            ItemsSource="{Binding OrderList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CanUserAddRows="False"
             x:Name="DataGridMaster">
             <DataGrid.Columns>
@@ -83,15 +84,16 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Edit" Style="{StaticResource HyperlinkButton}" 
-                                        Command="{Binding Path=DataContext.EditReceiveGood, 
+                                        Command="{Binding Path=DataContext.EditOrder, 
                                                 RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" 
-                                        CommandParameter="{Binding ReceiveGoodId}" HorizontalAlignment="Center"/>
+                                        CommandParameter="{Binding OrderId}" HorizontalAlignment="Center"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Document Number" Binding="{Binding DocumentNumber}"/>
-                <DataGridTextColumn Header="Truck Number" Binding="{Binding TruckNumber}"/>
-                <DataGridTextColumn Header="Receive Date" Binding="{Binding ReceiveDate}"/>
+                <DataGridTextColumn Header="Customer Name" Binding="{Binding Customer.Name}"/>
+                <DataGridTextColumn Header="Order Date" Binding="{Binding OrderDate}"/>
+                <DataGridTextColumn Header="Invoice Created" Binding="{Binding InvoiceCreated, Converter={StaticResource boolToActiveConvertor}}"/>
+                <DataGridTextColumn Header="IsActive" Binding="{Binding IsActive, Converter={StaticResource boolToActiveConvertor}}"/>
             </DataGrid.Columns>
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
@@ -99,14 +101,13 @@
                         Style="{StaticResource DataGridStyle}"
                         AutoGenerateColumns="False"
                         CanUserAddRows="False"
-                        ItemsSource="{Binding Path=SelectedItem.ShowReceiveGoodDetails, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ElementName=DataGridMaster}"
+                        ItemsSource="{Binding Path=SelectedItem.ShowOrderDetails, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ElementName=DataGridMaster}"
                         Margin="50,0,0,0">
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Product" Binding="{Binding Product.Name}"/>
-                            <DataGridTextColumn Header="Batch Number" Binding="{Binding BatchNumber}"/>
                             <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"/>
-                            <DataGridTextColumn Header="Total Value" Binding="{Binding TotalValue}"/>
+                            <DataGridTextColumn Header="Total Value" Binding="{Binding TotalPrice}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </DataTemplate>
@@ -114,6 +115,7 @@
 
         </DataGrid>
 
-    </Grid>
-</Window>
 
+    </Grid>
+    
+</Window>

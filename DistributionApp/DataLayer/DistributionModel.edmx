@@ -64,6 +64,7 @@
           <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CustomerId" Type="int" />
           <Property Name="OrderDate" Type="date" />
+          <Property Name="InvoiceCreated" Type="bit" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedAt" Type="datetime" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
@@ -323,6 +324,7 @@
           <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Customer" Relationship="DistributionDbModel.FK_Orders_Customer" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="OrderDetails" Relationship="DistributionDbModel.FK_OrderDetails_Orders" FromRole="Order" ToRole="OrderDetail" />
+          <Property Name="InvoiceCreated" Type="Boolean" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -506,6 +508,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="DistributionDbModel.Order">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="InvoiceCreated" ColumnName="InvoiceCreated" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
