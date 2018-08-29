@@ -18,6 +18,8 @@ namespace DistributionApp.DataLayer
         public Customer()
         {
             this.Orders = new HashSet<Order>();
+            this.Invoices = new HashSet<Invoice>();
+            this.TransactionDetails = new HashSet<TransactionDetail>();
         }
     
         public int CustomerId { get; set; }
@@ -38,5 +40,9 @@ namespace DistributionApp.DataLayer
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Invoice> Invoices { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransactionDetail> TransactionDetails { get; set; }
     }
 }

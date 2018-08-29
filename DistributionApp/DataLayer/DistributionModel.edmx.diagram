@@ -19,6 +19,16 @@
         <EntityTypeShape EntityType="DistributionDbModel.ReceiveGoodDetail" Width="1.5" PointX="9" PointY="5.75" />
         <AssociationConnector Association="DistributionDbModel.FK_ReceiveGoodDetails_Product" />
         <AssociationConnector Association="DistributionDbModel.FK_ReceiveGoodDetails_ReceiveGood" />
+        <EntityTypeShape EntityType="DistributionDbModel.Invoice" Width="1.5" PointX="9" PointY="6" />
+        <EntityTypeShape EntityType="DistributionDbModel.InvoiceDetail" Width="1.5" PointX="11.25" PointY="8.125" />
+        <EntityTypeShape EntityType="DistributionDbModel.TransactionDetail" Width="1.5" PointX="9.625" PointY="0.75" />
+        <EntityTypeShape EntityType="DistributionDbModel.TransactionType" Width="1.5" PointX="11.75" PointY="1.125" />
+        <AssociationConnector Association="DistributionDbModel.FK_Invoice_Customer" />
+        <AssociationConnector Association="DistributionDbModel.FK_TransactionDetails_Customer" />
+        <AssociationConnector Association="DistributionDbModel.FK_Invoice_Orders" />
+        <AssociationConnector Association="DistributionDbModel.FK_InvoiceDetails_Invoice" />
+        <AssociationConnector Association="DistributionDbModel.FK_InvoiceDetails_Product" />
+        <AssociationConnector Association="DistributionDbModel.FK_TransactionDetails_TransactionType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

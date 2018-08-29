@@ -95,6 +95,12 @@
     <Compile Include="DataLayer\Inventory.cs">
       <DependentUpon>DistributionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataLayer\Invoice.cs">
+      <DependentUpon>DistributionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\InvoiceDetail.cs">
+      <DependentUpon>DistributionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataLayer\Order.cs">
       <DependentUpon>DistributionModel.tt</DependentUpon>
     </Compile>
@@ -111,6 +117,12 @@
       <DependentUpon>DistributionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\ReceiveGoodDetailReport.cs" />
+    <Compile Include="DataLayer\TransactionDetail.cs">
+      <DependentUpon>DistributionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\TransactionType.cs">
+      <DependentUpon>DistributionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserContols\ucNumericTextBox.xaml.cs">
       <DependentUpon>ucNumericTextBox.xaml</DependentUpon>
     </Compile>

@@ -47,6 +47,30 @@
           <Property Name="UpdatedAt" Type="datetime" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="InvoiceId" />
+          </Key>
+          <Property Name="InvoiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvoiceDate" Type="date" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedAt" Type="datetime" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="InvoiceDetails">
+          <Key>
+            <PropertyRef Name="InvoiceDetailId" />
+          </Key>
+          <Property Name="InvoiceDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvoiceId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
         <EntityType Name="OrderDetails">
           <Key>
             <PropertyRef Name="OrderDetailId" />
@@ -110,6 +134,31 @@
           <Property Name="Quantity" Type="int" />
           <Property Name="TotalValue" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
+        <EntityType Name="TransactionDetails">
+          <Key>
+            <PropertyRef Name="TransactionId" />
+          </Key>
+          <Property Name="TransactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactionTypeId" Type="int" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="InvoiceId" Type="int" />
+          <Property Name="ChequeNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Details" Type="varchar(max)" />
+          <Property Name="TransactionDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TransactionType">
+          <Key>
+            <PropertyRef Name="TransactionTypeId" />
+          </Key>
+          <Property Name="TransactionTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
         <Association Name="FK_Inventory_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
@@ -118,6 +167,54 @@
               <PropertyRef Name="ProductId" />
             </Principal>
             <Dependent Role="Inventory">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceDetails_Invoice">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="0..1" />
+          <End Role="InvoiceDetails" Type="Self.InvoiceDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="InvoiceId" />
+            </Principal>
+            <Dependent Role="InvoiceDetails">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceDetails_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="InvoiceDetails" Type="Self.InvoiceDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="InvoiceDetails">
               <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
@@ -182,18 +279,62 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TransactionDetails_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="TransactionDetails" Type="Self.TransactionDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="TransactionDetails">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionDetails_TransactionType">
+          <End Role="TransactionType" Type="Self.TransactionType" Multiplicity="0..1" />
+          <End Role="TransactionDetails" Type="Self.TransactionDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionType">
+              <PropertyRef Name="TransactionTypeId" />
+            </Principal>
+            <Dependent Role="TransactionDetails">
+              <PropertyRef Name="TransactionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DistributionDbModelStoreContainer">
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoiceDetails" EntityType="Self.InvoiceDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReceiveGood" EntityType="Self.ReceiveGood" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReceiveGoodDetails" EntityType="Self.ReceiveGoodDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionType" EntityType="Self.TransactionType" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Inventory_Product" Association="Self.FK_Inventory_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="Inventory" EntitySet="Inventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Customer" Association="Self.FK_Invoice_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Orders" Association="Self.FK_Invoice_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceDetails_Invoice" Association="Self.FK_InvoiceDetails_Invoice">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="InvoiceDetails" EntitySet="InvoiceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceDetails_Product" Association="Self.FK_InvoiceDetails_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="InvoiceDetails" EntitySet="InvoiceDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
             <End Role="Orders" EntitySet="Orders" />
@@ -214,6 +355,14 @@
           <AssociationSet Name="FK_ReceiveGoodDetails_ReceiveGood" Association="Self.FK_ReceiveGoodDetails_ReceiveGood">
             <End Role="ReceiveGood" EntitySet="ReceiveGood" />
             <End Role="ReceiveGoodDetails" EntitySet="ReceiveGoodDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionDetails_Customer" Association="Self.FK_TransactionDetails_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="TransactionDetails" EntitySet="TransactionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionDetails_TransactionType" Association="Self.FK_TransactionDetails_TransactionType">
+            <End Role="TransactionType" EntitySet="TransactionType" />
+            <End Role="TransactionDetails" EntitySet="TransactionDetails" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -240,6 +389,8 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Orders" Relationship="DistributionDbModel.FK_Orders_Customer" FromRole="Customer" ToRole="Order" />
+          <NavigationProperty Name="Invoices" Relationship="DistributionDbModel.FK_Invoice_Customer" FromRole="Customer" ToRole="Invoice" />
+          <NavigationProperty Name="TransactionDetails" Relationship="DistributionDbModel.FK_TransactionDetails_Customer" FromRole="Customer" ToRole="TransactionDetail" />
         </EntityType>
         <EntityContainer Name="DistributionDbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Customers" EntityType="Self.Customer" />
@@ -273,6 +424,34 @@
           <AssociationSet Name="FK_ReceiveGoodDetails_ReceiveGood" Association="DistributionDbModel.FK_ReceiveGoodDetails_ReceiveGood">
             <End Role="ReceiveGood" EntitySet="ReceiveGoods" />
             <End Role="ReceiveGoodDetail" EntitySet="ReceiveGoodDetails" />
+          </AssociationSet>
+          <EntitySet Name="Invoices" EntityType="DistributionDbModel.Invoice" />
+          <EntitySet Name="InvoiceDetails" EntityType="DistributionDbModel.InvoiceDetail" />
+          <EntitySet Name="TransactionDetails" EntityType="DistributionDbModel.TransactionDetail" />
+          <EntitySet Name="TransactionTypes" EntityType="DistributionDbModel.TransactionType" />
+          <AssociationSet Name="FK_Invoice_Customer" Association="DistributionDbModel.FK_Invoice_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionDetails_Customer" Association="DistributionDbModel.FK_TransactionDetails_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="TransactionDetail" EntitySet="TransactionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Orders" Association="DistributionDbModel.FK_Invoice_Orders">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceDetails_Invoice" Association="DistributionDbModel.FK_InvoiceDetails_Invoice">
+            <End Role="Invoice" EntitySet="Invoices" />
+            <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceDetails_Product" Association="DistributionDbModel.FK_InvoiceDetails_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionDetails_TransactionType" Association="DistributionDbModel.FK_TransactionDetails_TransactionType">
+            <End Role="TransactionType" EntitySet="TransactionTypes" />
+            <End Role="TransactionDetail" EntitySet="TransactionDetails" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Employee">
@@ -325,6 +504,7 @@
           <NavigationProperty Name="Customer" Relationship="DistributionDbModel.FK_Orders_Customer" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="OrderDetails" Relationship="DistributionDbModel.FK_OrderDetails_Orders" FromRole="Order" ToRole="OrderDetail" />
           <Property Name="InvoiceCreated" Type="Boolean" />
+          <NavigationProperty Name="Invoices" Relationship="DistributionDbModel.FK_Invoice_Orders" FromRole="Order" ToRole="Invoice" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -342,6 +522,7 @@
           <NavigationProperty Name="Inventories" Relationship="DistributionDbModel.FK_Inventory_Product" FromRole="Product" ToRole="Inventory" />
           <NavigationProperty Name="OrderDetails" Relationship="DistributionDbModel.FK_OrderDetails_Product" FromRole="Product" ToRole="OrderDetail" />
           <NavigationProperty Name="ReceiveGoodDetails" Relationship="DistributionDbModel.FK_ReceiveGoodDetails_Product" FromRole="Product" ToRole="ReceiveGoodDetail" />
+          <NavigationProperty Name="InvoiceDetails" Relationship="DistributionDbModel.FK_InvoiceDetails_Product" FromRole="Product" ToRole="InvoiceDetail" />
         </EntityType>
         <Association Name="FK_Orders_Customer">
           <End Type="DistributionDbModel.Customer" Role="Customer" Multiplicity="0..1" />
@@ -440,6 +621,135 @@
             </Principal>
             <Dependent Role="ReceiveGoodDetail">
               <PropertyRef Name="ReceiveGoodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="InvoiceId" />
+          </Key>
+          <Property Name="InvoiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="0" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="DistributionDbModel.FK_Invoice_Customer" FromRole="Invoice" ToRole="Customer" />
+          <NavigationProperty Name="Order" Relationship="DistributionDbModel.FK_Invoice_Orders" FromRole="Invoice" ToRole="Order" />
+          <NavigationProperty Name="InvoiceDetails" Relationship="DistributionDbModel.FK_InvoiceDetails_Invoice" FromRole="Invoice" ToRole="InvoiceDetail" />
+        </EntityType>
+        <EntityType Name="InvoiceDetail">
+          <Key>
+            <PropertyRef Name="InvoiceDetailId" />
+          </Key>
+          <Property Name="InvoiceDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Invoice" Relationship="DistributionDbModel.FK_InvoiceDetails_Invoice" FromRole="InvoiceDetail" ToRole="Invoice" />
+          <NavigationProperty Name="Product" Relationship="DistributionDbModel.FK_InvoiceDetails_Product" FromRole="InvoiceDetail" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="TransactionDetail">
+          <Key>
+            <PropertyRef Name="TransactionId" />
+          </Key>
+          <Property Name="TransactionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionTypeId" Type="Int32" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="InvoiceId" Type="Int32" />
+          <Property Name="ChequeNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="DistributionDbModel.FK_TransactionDetails_Customer" FromRole="TransactionDetail" ToRole="Customer" />
+          <NavigationProperty Name="TransactionType" Relationship="DistributionDbModel.FK_TransactionDetails_TransactionType" FromRole="TransactionDetail" ToRole="TransactionType" />
+        </EntityType>
+        <EntityType Name="TransactionType">
+          <Key>
+            <PropertyRef Name="TransactionTypeId" />
+          </Key>
+          <Property Name="TransactionTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="TransactionDetails" Relationship="DistributionDbModel.FK_TransactionDetails_TransactionType" FromRole="TransactionType" ToRole="TransactionDetail" />
+        </EntityType>
+        <Association Name="FK_Invoice_Customer">
+          <End Type="DistributionDbModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="DistributionDbModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionDetails_Customer">
+          <End Type="DistributionDbModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="DistributionDbModel.TransactionDetail" Role="TransactionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="TransactionDetail">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Orders">
+          <End Type="DistributionDbModel.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="DistributionDbModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceDetails_Invoice">
+          <End Type="DistributionDbModel.Invoice" Role="Invoice" Multiplicity="0..1" />
+          <End Type="DistributionDbModel.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="InvoiceId" />
+            </Principal>
+            <Dependent Role="InvoiceDetail">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceDetails_Product">
+          <End Type="DistributionDbModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="DistributionDbModel.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="InvoiceDetail">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionDetails_TransactionType">
+          <End Type="DistributionDbModel.TransactionType" Role="TransactionType" Multiplicity="0..1" />
+          <End Type="DistributionDbModel.TransactionDetail" Role="TransactionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionType">
+              <PropertyRef Name="TransactionTypeId" />
+            </Principal>
+            <Dependent Role="TransactionDetail">
+              <PropertyRef Name="TransactionTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -559,6 +869,59 @@
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="ReceiveGoodId" ColumnName="ReceiveGoodId" />
                 <ScalarProperty Name="ReceiveGoodDetailId" ColumnName="ReceiveGoodDetailId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="DistributionDbModel.Invoice">
+              <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceDetails">
+            <EntityTypeMapping TypeName="DistributionDbModel.InvoiceDetail">
+              <MappingFragment StoreEntitySet="InvoiceDetails">
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+                <ScalarProperty Name="InvoiceDetailId" ColumnName="InvoiceDetailId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionDetails">
+            <EntityTypeMapping TypeName="DistributionDbModel.TransactionDetail">
+              <MappingFragment StoreEntitySet="TransactionDetails">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ChequeNumber" ColumnName="ChequeNumber" />
+                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="TransactionTypeId" ColumnName="TransactionTypeId" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionTypes">
+            <EntityTypeMapping TypeName="DistributionDbModel.TransactionType">
+              <MappingFragment StoreEntitySet="TransactionType">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TransactionTypeId" ColumnName="TransactionTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
