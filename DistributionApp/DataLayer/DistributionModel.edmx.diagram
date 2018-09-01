@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="aed0cc5373c145ec97320df14032ec32" Name="Diagram1">
         <EntityTypeShape EntityType="DistributionDbModel.Customer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DistributionDbModel.Employee" Width="1.5" PointX="0.75" PointY="7.875" />
+        <EntityTypeShape EntityType="DistributionDbModel.Employee" Width="1.5" PointX="0.875" PointY="6" />
         <EntityTypeShape EntityType="DistributionDbModel.Inventory" Width="1.5" PointX="6" PointY="8" />
         <EntityTypeShape EntityType="DistributionDbModel.OrderDetail" Width="1.5" PointX="6" PointY="4" />
         <EntityTypeShape EntityType="DistributionDbModel.Order" Width="1.5" PointX="3.75" PointY="0.75" />

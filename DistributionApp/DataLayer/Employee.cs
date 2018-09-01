@@ -17,5 +17,7 @@ namespace DistributionApp.DataLayer
         public int EmployeeId { get; set; }
         public string Name { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public Nullable<bool> IsSalesman { get; set; }
+        public Nullable<bool> IsOrderBooker { get; set; }
     }
 }

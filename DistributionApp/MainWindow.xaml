@@ -23,6 +23,11 @@
                         <Image Source="Images/product.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem Header="Employee" Command="{Binding OpenEmployeeList}">
+                    <MenuItem.Icon>
+                        <Image Source="Images/person.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Receive Goods" >
                 <MenuItem Header="Add New" Command="{Binding OpenReceiveGoods}"/>

@@ -26,6 +26,7 @@ namespace DistributionApp.ViewModels
         public ICommand OpenInventory { get; set; }
         public ICommand SaveOrders { get; set; }
         public ICommand SearchOrders { get; set; }
+        public ICommand OpenEmployeeList { get; set; }
 
         #endregion
 
@@ -39,6 +40,7 @@ namespace DistributionApp.ViewModels
             OpenInventory = new RelayCommand(OpenInventoryCommand);
             SaveOrders = new RelayCommand(SaveOrdersCommand);
             SearchOrders = new RelayCommand(SearchOrdersCommand);
+            OpenEmployeeList = new RelayCommand(OpenEmployeeListCommand);
         }
 
 
@@ -79,7 +81,6 @@ namespace DistributionApp.ViewModels
             inventoryView.Owner = Utils.Instance.GetMainWindowView();
             inventoryView.Show();
         }
-
         private void SaveOrdersCommand(object commandparameter)
         {
             SaveOrderView orderView = new SaveOrderView();
@@ -87,7 +88,6 @@ namespace DistributionApp.ViewModels
             orderView.Owner = Utils.Instance.GetMainWindowView();
             orderView.Show();
         }
-
         private void SearchOrdersCommand (object commandparameter)
         {
             OrderSearchView orderSearchView = new OrderSearchView();
@@ -95,7 +95,13 @@ namespace DistributionApp.ViewModels
             orderSearchView.Owner = Utils.Instance.GetMainWindowView();
             orderSearchView.Show();
         }
-
+        private void OpenEmployeeListCommand (object commandparameter)
+        {
+            EmployeeSearchView emplopyeeView = new EmployeeSearchView();
+            emplopyeeView.DataContext = new SearchEmployeeViewModel();
+            emplopyeeView.Owner = Utils.Instance.GetMainWindowView();
+            emplopyeeView.Show();
+        }
         #endregion
 
     }

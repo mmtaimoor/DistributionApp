@@ -164,5 +164,6 @@
 
     <convertors:BooleanToActiveConvertor x:Key="boolToActiveConvertor"/>
     <convertors:CalculateTotalPrice x:Key="CalculateTotalPrice"/>
+    <convertors:BoolInverterConverter x:Key="RadioButtonConvertor"/>
 
 </ResourceDictionary>

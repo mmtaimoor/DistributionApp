@@ -65,6 +65,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BusinessLayer\CustomerBL.cs" />
+    <Compile Include="BusinessLayer\EmployeeBL.cs" />
     <Compile Include="BusinessLayer\InventoryBL.cs" />
     <Compile Include="BusinessLayer\OrderBL.cs" />
     <Compile Include="BusinessLayer\ProductBL.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="Utilities\Utils.cs" />
     <Compile Include="ViewModels\AddCustomerViewModel.cs" />
+    <Compile Include="ViewModels\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CustomerSearchViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -140,13 +142,20 @@
     <Compile Include="ViewModels\SaveOrderViewModel.cs" />
     <Compile Include="ViewModels\SaveProductViewModel.cs" />
     <Compile Include="ViewModels\SaveReceiveGoodsViewModel.cs" />
+    <Compile Include="ViewModels\SearchEmployeeViewModel.cs" />
     <Compile Include="ViewModels\SearchProductViewModel.cs" />
     <Compile Include="ViewModels\ShowInventoryViewModel.cs" />
     <Compile Include="Views\AddCustomerView.xaml.cs">
       <DependentUpon>AddCustomerView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddEmployeeView.xaml.cs">
+      <DependentUpon>AddEmployeeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CustomerSearchView.xaml.cs">
       <DependentUpon>CustomerSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeeSearchView.xaml.cs">
+      <DependentUpon>EmployeeSearchView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OrderSearchView.xaml.cs">
       <DependentUpon>OrderSearchView.xaml</DependentUpon>
@@ -197,7 +206,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AddEmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CustomerSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EmployeeSearchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

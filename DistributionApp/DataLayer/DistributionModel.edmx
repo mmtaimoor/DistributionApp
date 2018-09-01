@@ -31,6 +31,8 @@
           </Key>
           <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="IsSalesman" Type="bit" />
+          <Property Name="IsOrderBooker" Type="bit" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="Inventory">
@@ -461,6 +463,8 @@
           <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsSalesman" Type="Boolean" />
+          <Property Name="IsOrderBooker" Type="Boolean" />
         </EntityType>
         <EntityType Name="Inventory">
           <Key>
@@ -783,6 +787,8 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="DistributionDbModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="IsOrderBooker" ColumnName="IsOrderBooker" />
+                <ScalarProperty Name="IsSalesman" ColumnName="IsSalesman" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
