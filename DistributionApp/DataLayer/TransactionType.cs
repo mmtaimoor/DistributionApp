@@ -23,6 +23,9 @@ namespace DistributionApp.DataLayer
         public int TransactionTypeId { get; set; }
         public string Description { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public Nullable<bool> ShowTransaction { get; set; }
+        public Nullable<bool> IsDebit { get; set; }
+        public Nullable<bool> IsCredit { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransactionDetail> TransactionDetails { get; set; }

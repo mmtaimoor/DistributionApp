@@ -27,6 +27,7 @@ namespace DistributionApp.ViewModels
         public ICommand SaveOrders { get; set; }
         public ICommand SearchOrders { get; set; }
         public ICommand OpenEmployeeList { get; set; }
+        public ICommand SaveTransaction { get; set; }
 
         #endregion
 
@@ -41,6 +42,7 @@ namespace DistributionApp.ViewModels
             SaveOrders = new RelayCommand(SaveOrdersCommand);
             SearchOrders = new RelayCommand(SearchOrdersCommand);
             OpenEmployeeList = new RelayCommand(OpenEmployeeListCommand);
+            SaveTransaction = new RelayCommand(SaveTransactionCommand);
         }
 
 
@@ -101,6 +103,13 @@ namespace DistributionApp.ViewModels
             emplopyeeView.DataContext = new SearchEmployeeViewModel();
             emplopyeeView.Owner = Utils.Instance.GetMainWindowView();
             emplopyeeView.Show();
+        }
+        private void SaveTransactionCommand (object commandparameter)
+        {
+            AddTransactionDetail transView = new AddTransactionDetail();
+            transView.DataContext = new AddTransactionDetailViewModel();
+            transView.Owner = Utils.Instance.GetMainWindowView();
+            transView.Show();
         }
         #endregion
 

@@ -70,6 +70,7 @@
     <Compile Include="BusinessLayer\OrderBL.cs" />
     <Compile Include="BusinessLayer\ProductBL.cs" />
     <Compile Include="BusinessLayer\ReceiveGoodsBL.cs" />
+    <Compile Include="BusinessLayer\TransactionBL.cs" />
     <Compile Include="Convertors\BooleanToActiveConvertor.cs" />
     <Compile Include="Convertors\CustomConvertors.cs" />
     <Compile Include="DataLayer\Customer.cs">
@@ -134,6 +135,7 @@
     <Compile Include="Utilities\Utils.cs" />
     <Compile Include="ViewModels\AddCustomerViewModel.cs" />
     <Compile Include="ViewModels\AddEmployeeViewModel.cs" />
+    <Compile Include="ViewModels\AddTransactionDetailViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CustomerSearchViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -150,6 +152,9 @@
     </Compile>
     <Compile Include="Views\AddEmployeeView.xaml.cs">
       <DependentUpon>AddEmployeeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddTransactionDetail.xaml.cs">
+      <DependentUpon>AddTransactionDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CustomerSearchView.xaml.cs">
       <DependentUpon>CustomerSearchView.xaml</DependentUpon>
@@ -207,6 +212,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddEmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddTransactionDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -301,6 +310,7 @@
       <DependentUpon>DistributionModel.edmx</DependentUpon>
       <LastGenOutput>DistributionModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Images\money.png" />
     <Resource Include="Images\save.png" />
     <Resource Include="Images\receivegoods.png" />
     <Resource Include="Images\truck.png" />

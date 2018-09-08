@@ -159,6 +159,9 @@
           </Key>
           <Property Name="TransactionTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="ShowTransaction" Type="bit" />
+          <Property Name="IsDebit" Type="bit" />
+          <Property Name="IsCredit" Type="bit" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
         <Association Name="FK_Inventory_Product">
@@ -684,6 +687,9 @@
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsActive" Type="Boolean" />
           <NavigationProperty Name="TransactionDetails" Relationship="DistributionDbModel.FK_TransactionDetails_TransactionType" FromRole="TransactionType" ToRole="TransactionDetail" />
+          <Property Name="ShowTransaction" Type="Boolean" />
+          <Property Name="IsDebit" Type="Boolean" />
+          <Property Name="IsCredit" Type="Boolean" />
         </EntityType>
         <Association Name="FK_Invoice_Customer">
           <End Type="DistributionDbModel.Customer" Role="Customer" Multiplicity="0..1" />
@@ -925,6 +931,9 @@
           <EntitySetMapping Name="TransactionTypes">
             <EntityTypeMapping TypeName="DistributionDbModel.TransactionType">
               <MappingFragment StoreEntitySet="TransactionType">
+                <ScalarProperty Name="IsCredit" ColumnName="IsCredit" />
+                <ScalarProperty Name="IsDebit" ColumnName="IsDebit" />
+                <ScalarProperty Name="ShowTransaction" ColumnName="ShowTransaction" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="TransactionTypeId" ColumnName="TransactionTypeId" />

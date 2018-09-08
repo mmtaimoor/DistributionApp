@@ -40,6 +40,19 @@
                 <MenuItem Header="Search" Command="{Binding SearchOrders}"/>
             </MenuItem>
 
+            <MenuItem Header="Transactions">
+                <MenuItem Header="Save Transaction" Command="{Binding SaveTransaction}" >
+                    <MenuItem.Icon>
+                        <Image Source="Images/money.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="View Customer Ledger" Command="{Binding CustomerLedger}" >
+                    <MenuItem.Icon>
+                        <Image Source="Images/money.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+
 
         </Menu>
     </Grid>
